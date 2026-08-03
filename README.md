@@ -2,8 +2,12 @@
 
 ## 🌐 Live Demo
 
-🔗 **Live Dashboard:** [Coming soon on Streamlit Cloud]
+**👉 Try the live dashboard here:** 
+[bushra-remote-jobs.streamlit.app](https://bushra-remote-jobs.streamlit.app/)
 
+> No installation needed. Click and explore.
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://bushra-remote-jobs.streamlit.app/)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Pandas](https://img.shields.io/badge/Pandas-Analysis-150458?logo=pandas&logoColor=white)](https://pandas.pydata.org/)
@@ -36,6 +40,9 @@ Built as a portfolio project to demonstrate skills in **web scraping**, **data a
 | ![Top Companies](screenshots/top_companies.png) | ![Top Technologies](screenshots/top_technologies.png) | ![Jobs by Day](screenshots/jobs_by_day.png) |
 
 **Streamlit Dashboard** — run `streamlit run src/app.py` to explore the interactive UI locally.
+
+> 💡 **Prefer to see it live?** 
+> [Open the interactive dashboard](https://bushra-remote-jobs.streamlit.app/)
 
 ---
 
