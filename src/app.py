@@ -18,7 +18,9 @@ import streamlit as st
 # ---------------------------------------------------------------------------
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DATA_PATH = PROJECT_ROOT / "data" / "jobs.csv"
+DATA_DIR = PROJECT_ROOT / "data"
+JOBS_PATH = DATA_DIR / "jobs.csv"
+SAMPLE_PATH = DATA_DIR / "jobs_sample.csv"
 PAGE_TITLE = "Remote Job Tracker"
 PAGE_ICON = "💼"
 
@@ -30,25 +32,57 @@ st.set_page_config(
 )
 
 
+def resolve_data_source() -> tuple[Path, str]:
+    """
+    Select the best available CSV data source.
+
+    Priority:
+        1. data/jobs.csv (live scraped data)
+        2. data/jobs_sample.csv (bundled sample for cloud deploy)
+
+    Returns:
+        Tuple of (file path, human-readable source label).
+
+    Raises:
+        FileNotFoundError: If neither CSV file exists.
+    """
+    if JOBS_PATH.exists():
+        return JOBS_PATH, "Live scraped data (`data/jobs.csv`)"
+
+    if SAMPLE_PATH.exists():
+        return SAMPLE_PATH, "Sample dataset (`data/jobs_sample.csv`)"
+
+    raise FileNotFoundError(
+        "No job data found. Expected `data/jobs.csv` or `data/jobs_sample.csv`."
+    )
+
+
 @st.cache_data(show_spinner=False)
-def load_data() -> pd.DataFrame:
+def load_data() -> tuple[pd.DataFrame, str]:
     """
     Load and preprocess job data from CSV.
 
     Returns:
-        Cleaned DataFrame ready for dashboard components.
+        Tuple of (cleaned DataFrame, data source label).
     """
-    if not DATA_PATH.exists():
+    try:
+        data_path, source_label = resolve_data_source()
+    except FileNotFoundError:
         st.error(
-            "Jobs data not found. Run the scraper first:\n\n"
+            "No job data available.\n\n"
+            "Run the scraper locally to generate `data/jobs.csv`:\n\n"
             "`python src/scraper.py`"
         )
         st.stop()
 
-    df = pd.read_csv(DATA_PATH)
+    df = pd.read_csv(data_path)
 
     if df.empty:
-        st.error("The jobs CSV file is empty. Run the scraper to collect data.")
+        st.error(
+            f"The selected data file is empty: `{data_path.name}`.\n\n"
+            "Run the scraper to collect job listings:\n\n"
+            "`python src/scraper.py`"
+        )
         st.stop()
 
     df["date"] = pd.to_datetime(df["date"], errors="coerce")
@@ -56,7 +90,18 @@ def load_data() -> pd.DataFrame:
     df["tag_list"] = df["tags"].fillna("").apply(
         lambda value: [tag.strip() for tag in str(value).split(",") if tag.strip()]
     )
-    return df
+    return df, source_label
+
+
+def render_data_source_banner(source_label: str) -> None:
+    """Display which dataset is currently powering the dashboard."""
+    if "sample" in source_label.lower():
+        st.info(
+            f"**Data source:** {source_label}. "
+            "Run `python src/scraper.py` locally to load fresh RemoteOK listings."
+        )
+    else:
+        st.success(f"**Data source:** {source_label}.")
 
 
 def _extract_salary_midpoint(salary_text: str | float) -> float | None:
@@ -288,8 +333,9 @@ def render_jobs_table(df: pd.DataFrame) -> None:
 
 def main() -> None:
     """Build and render the Streamlit dashboard."""
-    df = load_data()
+    df, source_label = load_data()
     render_header()
+    render_data_source_banner(source_label)
     filtered_df = apply_filters(df)
     render_kpis(filtered_df)
 

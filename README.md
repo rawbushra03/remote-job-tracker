@@ -1,5 +1,9 @@
 # 💼 Remote Job Tracker
 
+## 🌐 Live Demo
+
+🔗 **Live Dashboard:** [Coming soon on Streamlit Cloud]
+
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Pandas](https://img.shields.io/badge/Pandas-Analysis-150458?logo=pandas&logoColor=white)](https://pandas.pydata.org/)
@@ -73,7 +77,7 @@ remote-job-tracker/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/bushra-rawat/remote-job-tracker.git
+git clone https://github.com/rawbushra03/remote-job-tracker.git
 cd remote-job-tracker
 ```
 
@@ -173,7 +177,7 @@ This project uses the public RemoteOK feed for educational and portfolio purpose
 Systems Engineering Student | Aspiring Remote Developer
 
 - 🔗 LinkedIn: [linkedin.com/in/bushra-rawat](https://www.linkedin.com/in/bushra-rawat)
-- 🐙 GitHub: [github.com/bushra-rawat](https://github.com/bushra-rawat)
+- 🐙 GitHub: [github.com/rawbushra03](https://github.com/rawbushra03)
 
 ---
 
