@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project data (keep sample CSV for reference)
+data/*.csv
+!data/jobs_sample.csv
+
+# macOS
+.DS_Store
