@@ -139,6 +139,11 @@ def print_summary_statistics(df: pd.DataFrame) -> None:
     else:
         print("Average salary (USD)   : N/A (no salary data)")
 
+    if "source" in df.columns:
+        print("\n--- Jobs by Source ---")
+        for source, count in df["source"].value_counts().items():
+            print(f"  {source:<35} {count:>3} jobs")
+
     print("\n--- Top 10 Companies ---")
     top_companies = df["company"].value_counts().head(10)
     for company, count in top_companies.items():

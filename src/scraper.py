@@ -41,7 +41,8 @@ REQUEST_HEADERS = {
     "Referer": BASE_URL,
 }
 
-CSV_COLUMNS = ["title", "company", "tags", "salary", "date", "link"]
+SOURCE_NAME = "RemoteOK"
+CSV_COLUMNS = ["title", "company", "tags", "salary", "date", "source", "link"]
 
 
 def get_project_root() -> Path:
@@ -202,6 +203,7 @@ def parse_job_record(record: dict[str, Any]) -> dict[str, str]:
         "tags": tags_str,
         "salary": format_salary(record.get("salary_min"), record.get("salary_max")),
         "date": format_date(record.get("date")),
+        "source": SOURCE_NAME,
         "link": link.strip(),
     }
 
