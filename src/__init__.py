@@ -1,3 +1,7 @@
-"""Remote Job Tracker - scrape, analyze, and visualize remote job listings."""
+"""Remote Job Tracker - scrape, analyze, and visualize remote job listings.
 
-__version__ = "1.0.0"
+Aggregates remote jobs from multiple sources (RemoteOK, Remotive, Arbeitnow,
+We Work Remotely) into a unified dataset and visualizes it with Streamlit.
+"""
+
+__version__ = "2.0.0"
